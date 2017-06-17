@@ -5,6 +5,13 @@ date:   2017-06-16 10:33:20 -0500
 categories: cloudformation 
 ---
 
+<h1>Abstract</h1>
+
+<p>
+Complex enterprise network layouts with multiple product offerings which each contain clusters of microservices
+require complex solutions that can sustain changes though time and fluctuating security requirements.
+</p>
+
 <h1>Overview</h1>
 
 <p>
@@ -120,11 +127,18 @@ Let's take a look at a very simple example using the ImageId attribute.  In most
 </p>
 
 {% highlight json %}
-{ "Parameters": { "ImageId": { "Type": "String" } } }
-{ "Resources": {
-  "ASG": {
-    "ImageId": { "Ref": "ImageId" }
-  }
+{
+    "Parameters": {
+        "ImageId": {
+            "Type": "String"
+        }
+    },
+
+    "Resources": {
+        "ASG": {
+            "ImageId": { "Ref": "ImageId" }
+        }
+    }
 }
 {% endhighlight %}
 
@@ -135,21 +149,24 @@ This is all fine and good, but let's look at another, slightly more complicated 
 </p>
 
 {% highlight json %}
-"Mappings" : {
-  "RegionMap" : {
-    "us-east-1"      : { "32" : "ami-6411e20d"},
-    "us-west-1"      : { "32" : "ami-c9c7978c"},
-    "eu-west-1"      : { "32" : "ami-37c2f643"},
-    "ap-southeast-1" : { "32" : "ami-66f28c34"},
-    "ap-northeast-1" : { "32" : "ami-9c03a89d"}
-  }
-},
-"Resources":
-    "EC2": {
-        "Properties": {
-            "ImageId" : { "Fn::FindInMap" : ["RegionMap", { "Ref" : "AWS::Region" }, "AMI"] }
+{
+    "Mappings": {
+        "RegionMap" : {
+            "us-east-1"      : { "32" : "ami-6411e20d"},
+            "us-west-1"      : { "32" : "ami-c9c7978c"},
+            "eu-west-1"      : { "32" : "ami-37c2f643"},
+            "ap-southeast-1" : { "32" : "ami-66f28c34"},
+            "ap-northeast-1" : { "32" : "ami-9c03a89d"}
+        }
+    },
+    "Resources": {
+        "EC2": {
+            "Properties": {
+                "ImageId" : { "Fn::FindInMap" : ["RegionMap", { "Ref" : "AWS::Region" }, "AMI"] }
+            }
         }
     }
+}
 {% endhighlight %}
 
 <p>
@@ -163,16 +180,22 @@ look at where this starts becoming a big problem.  In this example we're going t
 </p>
 
 {% highlight json %}
-{ "Resources": {
-  "ASGLeft": {
-    "Min": 1, "Max": 1,
-    [ config stuff for left ... ]  
-  },
-  "ASGRight": {
-    "Min": 1, "Max": 1,
-    [ config stuff for right ... ]
-  }
-}}
+{
+    "Resources": {
+        "ASGLeft": {
+            "Properties": {
+                "Min": 1,
+                "Max": 1
+            }
+        },
+        "ASGRight": {
+            "Properties": {
+                "Min": 1,
+                "Max": 1
+            }
+        }
+    }
+}
 {% endhighlight %}
 
 <p>
@@ -192,7 +215,11 @@ The first thing we do is create a template for the ASG:
 <h4>templates/main.json:</h4>
 
 {% highlight json %}
-{ "Resources": { [ config stuff for everyone... ] }}
+{
+    "Resources": {},
+    "Mappings": {},
+    "Parameters": {}
+}
 {% endhighlight %}
 
 <h4>templates/asg.json:</h4>
@@ -201,7 +228,9 @@ The first thing we do is create a template for the ASG:
 {
     "ASGNameTemplate": {
         "Properties": {
-            "Key": "Value"
+            "Key": "Value",
+            "Min": 1,
+            "Max": 1
         }
     }
 }
@@ -235,18 +264,30 @@ Just before we launch the stack we would have something like this:
 </p>
 
 {% highlight ruby %}
+## Open a template file.
 fs_tmp_file = "/tmp/blah/%i.json" % Time.new.to_i
 f = File.open( fs_tmp_file, "w" )
+
+## Dump the json to the file.
 f.puts( stack.to_json )
 f.close
+
+## Launch the stack using the aws cli.
 aws cloudformation launch-stack --template-body file://#{fs_tmp_file}
 {% endhighlight %}
+
+<p>
+There's an interesting side effect to doing things like this in that the JSON that is dumped
+to the temp file is compiled.  Which just means that all the line breaks are taken out.  This
+makes the overall payload smaller which means you can pack more stupid bullshit into your
+stack.
+</p>
 
 <p>
 The idea here is that we're going to use this idea of composition to create a CF stack,
 then write the JSON data to disk and send that file off to the CF API.
 Of course, we could do the same thing using API calls, which is just as fine.
-This is a choice I make but it can go one of two ways:
+This is a choice I make but it can go one of two ways.
 </p>
 
 <ul>
@@ -261,31 +302,43 @@ traces and working with debugging API's in a different way.
 </p>
 
 <p>
+We can extend this idea to include many types of commonly used objects.  In fact there are libraries built
+to extend this idea by creating generic objects which act like CloudFormation types.  These are
+great for going all in on the IaC concepts, but so far still leave a bit of a gap in functionality.
+Worth looking into if any of these ideas are sparking your creative genious ( or your evil genious,
+whatever, we don't judge ).
+</p>
+
+<p>
 Let's take a look at a more practical example using VPC's.  In most cases people are fond of this kind of pattern:
 </p>
 
-<% highlight json %}
-"Parameters": {
-    "VpcId": {
-        "Type": "String"
-    }
-},
-"Resources": {
-    "ASG": {
-        "VpcId": { "Ref": "VpcId" }
+{% highlight json %}
+{
+    "Parameters": {
+        "VpcId": {
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "ASG": {
+            "VpcId": { "Ref": "VpcId" }
+        }
     }
 }
 {% endhighlight %}
 
 <p>
-Most people will have the VpcId stored in a YAML file that lives in the project.
+Most people will have the VpcId stored in a YAML file that lives in the project.  Or, some people will
+use something like a params file where they keep the VPC/Subnet values stored.
 The idea being that the VPC will never change and most people have only one or two VPC's, which is easy to track.
 However, let's assume we live in a world where we have much more complexity.
 In fact, let's do a little math problem here:
 </p>
 
 <p>
-Let's say we have 5 products, each product has 3 AWS accounts:
+Let's say we have 5 products, each product has 3 AWS accounts.  Each product can have any number of services
+running.  Let's say we're using ECS and docker because we're awesome and that's fun.
 </p>
 
 <ul>
@@ -296,13 +349,14 @@ Let's say we have 5 products, each product has 3 AWS accounts:
 
 <p>
 For each account we're active in 2 regions, but generally we're only going to use 1.
-In some cases like mongodb we'll need to use at least two regions.
+In some cases like mongodb we'll need to use at least two regions for failover, but that only appiles
+to production and maybe DR, but not pre-prod.
 We also assume that, by default, the security team is going to do us a solid by installing our VPC's for us
 by creating a CF stack which has everything we'll need for the VPC's, bastions and subnets.
 </p>
 
 <p>
-5 services * 3 accounts = 15 service accounts
+5 products * 3 accounts = 15 service accounts
 </p>
 
 <p>
@@ -313,14 +367,16 @@ by creating a CF stack which has everything we'll need for the VPC's, bastions a
 Right off the bat, that's 30 VPC's we'd be tracking.
 That doesn't include what happens when a single new service is spun up,
 which will add 3 accounts * 2 regions = 6 service account regions and therefor 6 more VPC's to track.
-Also, when something changes, which it might, how can we guarantee that the changes
-that happen in the AWS space are reflected in our git repo?  The answer is, of course: we can't.
 </p>
 
 <p>
-There is also the edge case that the security team decides they want to improve the layout of their
-offering, and create a new collection of VPC's that we eventually move over to.  In that case everything
-just doubled and changed.
+We assume that change is going to happen, even at the networking level.  There may be a case where
+we have to move everything over to a new version of the VPC stacks.  If we did everything by hand
+we'd have to trak 30 different VPC's in, potentially, 30 different YAML files.
+Good engineers ( DevOps/SRE/whatever ) will find a way to program this problem.
+Bad engineers will often just do it by hand because it's a one off and in their mind
+programming is more difficult and time consuming and therefor not worth the effort
+( read: <b>investment</b> ).
 </p>
 
 <p>
@@ -329,31 +385,156 @@ subnet layout in which each topic has it's own subnet:
 </p>
 
 <ul>
-    <li>ELB's</li>
+    <li>Public web for things like [E,A]LB's</li>
     <li>Bastion hosts ( jump boxes )</li>
     <li>Things that the ELB's hit ( routers like nginx and such )</li>
-    <li>Service things that do business logic ( tomcat, service layer )</li>
+    <li>Service things that do business logic ( java apps, nodejs, etc... )</li>
     <li>Backend services ( AMQ, DB, etc... )</li>
     <li>Security scanning and compliance subnet</li>
 </ul>
 
 <p>
-That's 6 topics and we end up having at least 2 of each of these per zone, so if we span across 3 zones we have:
+We could have anywhere between 1 and 5 zones, but on average, typically 3 are used
 </p>
 
-6 topics * 3 zones = 18 subnet topic zones per service account region = 810 subnet ids that are going to be tracked.
+<p>
+6 topics * 3 zones = 18 subnets per service account region.
+30 service account regions ( or VPC's ) * 18 subnets = 540 total subnets.
+</p>
 
-Wow, that's quite a few subnets!
+<p>
+That means that in total, accross all accounts someone will have to manage a total of 540
+things that might move.  Looking at the numbers it's hard to imagine anyone trying to justify
+not making the <b>investment</b> to code their way out of this problem.
+</p>
 
-That doesn't include things like SNS topics, IAM things, or any other thing that might be a part of an operating environment.
+<p>
+Here's where the magic of a code-based approach comes in.
+Instead of trying to maintain hordes of YAML files for all of these 540 subnets,
+we use the aws cli to find our resources.  We <b>invest</b> in a more sustainable
+solution by implementing deterministic resource discovery.
+</p>
 
-But here's where we the magic of a code-based approach comes in.  Instead of trying to maintain hordes of json files for all of these 810 subnets, we use the aws cli to find our resources, for example:
+<h4>Deterministic resource discovery</h4>
 
-vpc = aws ec2 describe-vpcs --filters 'Name=tag:Role,Values=ApprovedVPCTag' 'Name=tag:Lifecycle,Values=current' 
-elb_subnets = aws ec2 describe-vpc-subnets --filters 'Name=tag:Role,Values=elb' 'Name=vpc-id,Values=#{vpc[VpcId]}'
+<p>
+This is a huge win because now we can use vague names for things.  For example let's compare and contrast
+the two approaches available here.
+</p>
 
-We "discover" our resources, then send the Id's into the CF stack using params.  This is where we get the "discovery" part of the "discovery and composition" methodology.
+<p>
+First, let's take a look at the more traditional way of handling the VPC and Subnet Id's.
+In this example we're going to use a YAML file to act as our high level configuration.
+This is a fairly common practice which allows us to use a YAML file to specify a few high level
+ideas that our stack creation software that expands to more specific things.
+</p>
 
-In this model we can be assured that if something in the environment changes, we won't have to care.  Our stuff will "just work" which means resiliency and reliability are enhanced.
+{% highlight yaml %}
+---
+region: us-east-1
+vpc: vpc-12345678
+public_subnet_az1: subnet-12345678
+public_subnet_az2: subnet-12345678
+public_subnet_az3: subnet-87654321
+private_subnet_az1: subnet-12345678
+private_subnet_az2: subnet-12345678
+private_subnet_az3: subnet-87654321
+...and so on...
+{% endhighlight %}
 
-It also means that we have to do less "hunt and peck" operations to find out what "should" be in the json files and what is in the environment.
+<p>
+To be clear, this may seem horribly wrong, but this is something people actively commit to in the
+enterprise world.  Which is part of why I've created this post.  It's important to call this out
+as a bad patthern.
+</p>
+
+<p>
+Let's look at how this would look if we were to apply the rules of data normalization and deterministic
+resource discovery.
+</p>
+
+{% highlight yaml %}
+---
+region: us-east-1
+vpc:
+    Name: main
+    Version: 0.1.0
+public_subnets:
+    Role: public
+private_subnets:
+    Role: private
+{% endhighlight %}
+
+<p>
+The code would perform a look up based on the key/value pair ( kvp ) provided for the resources.
+For example it might look something like this in ruby.
+</p>
+
+{% highlight ruby %}
+require 'aws-sdk'
+
+creds = Aws::SharedCredentials.new()
+ec2_client = Aws::EC2::Client.new(region: ENV['AWS_DEFAULT_REGION'], credentials: creds)
+
+yaml = ## load yaml from file
+
+filters = []
+
+for k,v in yaml['vpc'] do
+    filters.push(
+        name: format('tag:%s' % k),
+        values: [v]
+    )
+end
+
+res = ec2_client.describe_vpcs(filters: filters)
+
+vpc = ## get vpc
+
+public_subnets = []
+
+public_subnet_filters = [{
+    name: 'vpc-id',
+    values: [vpc.vpc_id]
+},{
+    name: 'tag:Role',
+    values: [yaml['public_subnets']['Role']]
+}]
+public_subnets = ec2_client.desciribe_subnets( public_subnet_filters )
+{% endhighlight %}
+
+<p>
+This is intended as meta code just to convey the idea.  Obviously we'd want to extend this out into functions
+and other contructs.
+
+The idea here is that we're trying to get the programming to do the work for us here and make it as easy
+and painles on the end user as possible.
+
+In this example we might return 3 subnets, or 5 depending on how the security team has things setup.  In
+either case we don't have to care.  If we were changing from 3 to 5 subnets, or maybe the subnets
+have changed, then we'd be on the hook to update the YAML files accordingly.
+</p>
+
+<p>
+Something else to note here is that I'm also using a version string for the VPC.  With this kind of methodoogy
+we can now version or infrastrcture and allow for any kind of blue green deployment at the networking level.
+Try doing that in a datacenter. ;)
+</p>
+
+<h4>Client configs</h4>
+
+<p>
+In many cases our end users are the consumers of our platform tools and not the end
+users of the products we're deploying.  I've been on 3 projects so far where
+we ended up putting a giant shotgun-sized hole in our foot by forcing the develoopers and operational
+support teams to manage complex YAML configurations which define the environment they'll be working in.
+</p>
+
+<p>
+Taking the complexity away from developers and support staff is a huge win.  Esspecially in complex
+enterprise organizations which often utilize contract help to build out the infrastrcture.
+</p>
+
+<p>
+Regardless of what you call the approach the result is the same: solve your problems with code.
+</p>
