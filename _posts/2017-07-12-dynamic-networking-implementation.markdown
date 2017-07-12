@@ -40,7 +40,7 @@ different in that it won't require building a VPC map, but we will be using the 
 </p>
 
 <p>
-The <a href="">code</a> demonstrates how to use boto3 to get the VPCs and subnets from AWS using filters.
+The <a href="https://github.com/krogebry/krogebry.github.io/blob/master/code/app_on_dynamic_net/make_application_template.py">code</a> demonstrates how to use boto3 to get the VPCs and subnets from AWS using filters.
 </p>
 
 <p>
