@@ -307,8 +307,6 @@ Now let's query to find our subnets for the <b>public load balancers</b> role.
 $ aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-f7f3638e" "Name=tag:role,Values=public load balancers"
 {% endhighlight %}
 
-<a href="">Example output</a>
-
 <p>
 At this point we have a fully functioning set of networking gear that allows us to enable our developers quick
 and easy access to the resources without them having to know much about the complexity of this world.  In the next

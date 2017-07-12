@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0d89c39d-1987-49e7-96f4-06378ddff15f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2017-07-12-dynamic-networking-implementation.markdown" afterPath="$PROJECT_DIR$/_posts/2017-07-12-dynamic-networking-implementation.markdown" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2017-07-11-dynamic-vpcs.markdown" afterPath="$PROJECT_DIR$/_posts/2017-07-11-dynamic-vpcs.markdown" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,8 +18,8 @@
       <file leaf-file-name="2017-07-11-dynamic-vpcs.markdown" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/2017-07-11-dynamic-vpcs.markdown">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="33" column="114" lean-forward="false" selection-start-line="33" selection-start-column="114" selection-end-line="33" selection-end-column="114" />
+            <state relative-caret-position="250">
+              <caret line="33" column="2" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -28,8 +28,8 @@
       <file leaf-file-name="2017-07-12-dynamic-networking-implementation.markdown" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/2017-07-12-dynamic-networking-implementation.markdown">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="42" column="124" lean-forward="false" selection-start-line="42" selection-start-column="124" selection-end-line="42" selection-end-column="124" />
+            <state relative-caret-position="317">
+              <caret line="42" column="6" lean-forward="false" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -58,6 +58,8 @@
       <find>instance_type</find>
       <find>desired-capacity</find>
       <find>Parameters</find>
+      <find>example</find>
+      <find>&lt;a</find>
     </findStrings>
     <replaceStrings>
       <replace>APP-ENV-VPC</replace>
@@ -73,8 +75,8 @@
       <replace>alb-subnet-ids</replace>
       <replace>app-zones</replace>
       <replace>instance-type</replace>
-      <replace>DesiredCapacity</replace>
       <replace>instance_type</replace>
+      <replace>DesiredCapacity</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -100,8 +102,8 @@
         <option value="$PROJECT_DIR$/code/app_on_dynamic_net/cf_templates/application.json" />
         <option value="$PROJECT_DIR$/code/app_on_dynamic_net/app_config.yml" />
         <option value="$PROJECT_DIR$/code/app_on_dynamic_net/make_application_template.py" />
-        <option value="$PROJECT_DIR$/_posts/2017-07-11-dynamic-vpcs.markdown" />
         <option value="$PROJECT_DIR$/_posts/2017-07-12-dynamic-networking-implementation.markdown" />
+        <option value="$PROJECT_DIR$/_posts/2017-07-11-dynamic-vpcs.markdown" />
       </list>
     </option>
   </component>
@@ -676,16 +678,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2017-07-11-dynamic-vpcs.markdown">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="33" column="114" lean-forward="false" selection-start-line="33" selection-start-column="114" selection-end-line="33" selection-end-column="114" />
+        <state relative-caret-position="250">
+          <caret line="33" column="2" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="2" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2017-07-12-dynamic-networking-implementation.markdown">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="42" column="124" lean-forward="false" selection-start-line="42" selection-start-column="124" selection-end-line="42" selection-end-column="124" />
+        <state relative-caret-position="317">
+          <caret line="42" column="6" lean-forward="false" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="6" />
           <folding />
         </state>
       </provider>
