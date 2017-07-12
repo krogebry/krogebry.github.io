@@ -31,7 +31,7 @@ aims at solving that complication by showing how we can solve the complexity pro
 The biggest challenge is how to allocate the CIDR blocks for respective subnets.
 </p>
 
-<a href="/code/dynamic_networking/generate_subnet_map.py">Code</a>
+<a href="https://github.com/krogebry/krogebry.github.io/blob/master/code/dynamic_networking/generate_subnet_map.py">Code</a>
 
 <p>
 It's probably okay to assume that the number of avaliable data centers is going to stay a static value.  However,
