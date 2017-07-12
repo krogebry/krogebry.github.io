@@ -1,0 +1,16 @@
+{
+  "Resources": {
+    "Subnet": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {},
+        "AvailabilityZone": {},
+        "CidrBlock": "",
+        "Tags": [{
+          "Key": "StackName",
+          "Value": {"Ref": "AWS::StackName"}
+        }]
+      }
+    }
+  }
+}

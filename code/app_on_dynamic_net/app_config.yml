@@ -1,0 +1,4 @@
+---
+vpc:
+  name: green
+key_pair_name: ct-compute-0

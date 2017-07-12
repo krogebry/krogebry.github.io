@@ -1,0 +1,703 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Resources": {
+    "subblock25": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.49.0/24",
+        "AvailabilityZone": "us-east-1b",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "bastion",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock24": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.48.0/24",
+        "AvailabilityZone": "us-east-1a",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "bastion",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock27": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.51.0/24",
+        "AvailabilityZone": "us-east-1d",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "bastion",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock26": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.50.0/24",
+        "AvailabilityZone": "us-east-1c",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "bastion",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock21": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.36.0/22",
+        "AvailabilityZone": "us-east-1d",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "security",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock20": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.32.0/22",
+        "AvailabilityZone": "us-east-1c",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "security",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock23": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.44.0/22",
+        "AvailabilityZone": "us-east-1f",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "security",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock22": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.40.0/22",
+        "AvailabilityZone": "us-east-1e",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "security",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock29": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.53.0/24",
+        "AvailabilityZone": "us-east-1f",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "bastion",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock28": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.52.0/24",
+        "AvailabilityZone": "us-east-1e",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "bastion",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "vpcred": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "172.17.0.0/16",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "red",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock8": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcgreen"
+        },
+        "CidrBlock": "172.16.28.0/23",
+        "AvailabilityZone": "us-east-1c",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "public facing nginx",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock9": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcgreen"
+        },
+        "CidrBlock": "172.16.30.0/23",
+        "AvailabilityZone": "us-east-1d",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "public facing nginx",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock6": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcgreen"
+        },
+        "CidrBlock": "172.16.24.0/23",
+        "AvailabilityZone": "us-east-1a",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "public facing nginx",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock7": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcgreen"
+        },
+        "CidrBlock": "172.16.26.0/23",
+        "AvailabilityZone": "us-east-1b",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "public facing nginx",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock4": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcgreen"
+        },
+        "CidrBlock": "172.16.16.0/22",
+        "AvailabilityZone": "us-east-1e",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "public load balancers",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock5": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcgreen"
+        },
+        "CidrBlock": "172.16.20.0/22",
+        "AvailabilityZone": "us-east-1f",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "public load balancers",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock2": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcgreen"
+        },
+        "CidrBlock": "172.16.8.0/22",
+        "AvailabilityZone": "us-east-1c",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "public load balancers",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock3": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcgreen"
+        },
+        "CidrBlock": "172.16.12.0/22",
+        "AvailabilityZone": "us-east-1d",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "public load balancers",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock0": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcgreen"
+        },
+        "CidrBlock": "172.16.0.0/22",
+        "AvailabilityZone": "us-east-1a",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "public load balancers",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock1": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcgreen"
+        },
+        "CidrBlock": "172.16.4.0/22",
+        "AvailabilityZone": "us-east-1b",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "public load balancers",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock18": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.24.0/22",
+        "AvailabilityZone": "us-east-1a",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "security",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock19": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.28.0/22",
+        "AvailabilityZone": "us-east-1b",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "security",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock10": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcgreen"
+        },
+        "CidrBlock": "172.16.32.0/23",
+        "AvailabilityZone": "us-east-1e",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "public facing nginx",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock11": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcgreen"
+        },
+        "CidrBlock": "172.16.34.0/23",
+        "AvailabilityZone": "us-east-1f",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "public facing nginx",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock12": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.0.0/22",
+        "AvailabilityZone": "us-east-1a",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "operations",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock13": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.4.0/22",
+        "AvailabilityZone": "us-east-1b",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "operations",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock14": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.8.0/22",
+        "AvailabilityZone": "us-east-1c",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "operations",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock15": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.12.0/22",
+        "AvailabilityZone": "us-east-1d",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "operations",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock16": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.16.0/22",
+        "AvailabilityZone": "us-east-1e",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "operations",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "subblock17": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "vpcred"
+        },
+        "CidrBlock": "172.17.20.0/22",
+        "AvailabilityZone": "us-east-1f",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "operations",
+            "Key": "role"
+          }
+        ]
+      }
+    },
+    "vpcgreen": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "172.16.0.0/16",
+        "Tags": [
+          {
+            "Key": "StackName",
+            "Value": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          {
+            "Value": "green",
+            "Key": "role"
+          }
+        ]
+      }
+    }
+  },
+  "Description": "",
+  "Parameters": {}
+}

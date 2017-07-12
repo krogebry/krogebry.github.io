@@ -1,0 +1,13 @@
+{
+    "StackName": "",
+    "TemplateBody": "",
+    "Parameters": [],
+    "DisableRollback": true,
+    "TimeoutInMinutes": 30,
+
+    "Capabilities": [
+        "CAPABILITY_IAM"
+    ],
+
+    "Tags": []
+}

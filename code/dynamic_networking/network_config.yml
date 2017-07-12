@@ -1,0 +1,22 @@
+---
+vpcs:
+  - name: green
+    cidr: 172.16.0.0/16
+    subnets:
+      - name: public load balancers
+        size: large
+      - name: public facing nginx
+        size: medium
+      - name: application
+        size: large
+      - name: database
+        size: small
+  - name: red
+    cidr: 172.17.0.0/16
+    subnets:
+      - name: operations
+        size: large
+      - name: security
+        size: large
+      - name: bastion
+        size: small

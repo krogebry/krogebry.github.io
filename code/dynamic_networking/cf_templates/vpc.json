@@ -1,0 +1,14 @@
+{
+  "Resources": {
+    "VPC": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "",
+        "Tags": [{
+          "Key": "StackName",
+          "Value": {"Ref": "AWS::StackName"}
+        }]
+      }
+    }
+  }
+}
