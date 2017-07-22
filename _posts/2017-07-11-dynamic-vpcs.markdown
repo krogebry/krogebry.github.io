@@ -5,9 +5,6 @@ date:   2017-06-16 10:33:20 -0500
 categories: aws
 ---
 
-<h1>Abstract</h1>
-
-
 <h1>Overview</h1>
 
 <p>
