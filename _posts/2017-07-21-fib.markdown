@@ -8,7 +8,7 @@ categories: aws
 <h1>Overview</h1>
 
 <p>
-The Fibonacci sequence an algorithm.  We give input to the algorithm, the algorithm runs, and we get an outcome.  Most applications follow this basic idea.  Your
+The Fibonacci sequence is an algorithm.  We give input to the algorithm, the algorithm runs, and we get an outcome.  Most applications follow this basic idea.  Your
 basic web interface takes your input ( "GET /" for example ) and returns output in the form of a properly ( hopefully! ) formatted HTTP response.
 </p>
 
@@ -55,10 +55,10 @@ mechanics of building gems and all of that, and just go with a basic example of 
 The idea here is just to move the basic logic into a function that performs the same actions and creates the same output.
 </p>
 
-<% highlight bash %}
+{% highlight bash %}
 krogebry@ubuntu-secure:~/dev/krogebry.github.io/code/fib$ ./fib_func.rb 
 [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597]
-<% endhighlight %}
+{% endhighlight %}
 
 <p>
 This is about as quick and dirty as we can get.  This would allow us to implement the <b>fib(N)</b> function somewhere else.  Luckily this is still within the boundaries
